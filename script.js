@@ -83,13 +83,13 @@ const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)')
    CONTENT DATA (Editable via editor.html)
    ============================================ */
 const defaultPhotos=[
-  {src:'photoes/1.jpeg',caption:'Photo 1',cls:'span2'},
-        {src:'photoes/2.jpeg',caption:'Photo 2',cls:'tall'},
-        {src:'photoes/3.jpeg',caption:'Photo 3',cls:''},
-        {src:'photoes/4.jpeg',caption:'Photo 4',cls:''},
-        {src:'photoes/5.jpeg',caption:'Photo 5',cls:'span2'},
-        {src:'photoes/6.png',caption:'Photo 6',cls:''},
-        {src:'photoes/7.jpeg',caption:'Photo 7',cls:'span2'}
+  {src:'1.jpeg',caption:'Photo 1',cls:'span2'},
+        {src:'2.jpeg',caption:'Photo 2',cls:'tall'},
+        {src:'3.jpeg',caption:'Photo 3',cls:''},
+        {src:'4.jpeg',caption:'Photo 4',cls:''},
+        {src:'5.jpeg',caption:'Photo 5',cls:'span2'},
+        {src:'6.png',caption:'Photo 6',cls:''},
+        {src:'7.jpeg',caption:'Photo 7',cls:'span2'}
       ];
 
 const defaultNote=`Some distances are measured in miles, but ours has been measured in memories, calls, and countless moments of missing you. Yet I still can’t forget the day I left you at the airport — that moment somehow feels both distant and like yesterday.
