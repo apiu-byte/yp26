@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Site Editor</title>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#12131a;
+      color:#f5f6fb;
+      line-height:1.4;
+    }
+    .wrap{
+      max-width:980px;
+      margin:24px auto;
+      padding:0 16px 28px;
+    }
+    h1{margin:0 0 8px;font-size:1.7rem}
+    .muted{opacity:.8;margin:0 0 18px}
+    .card{
+      background:#1c1f2a;
+      border:1px solid #2f3345;
+      border-radius:12px;
+      padding:16px;
+      margin-bottom:14px;
+    }
+    label{
+      display:block;
+      font-weight:700;
+      margin:0 0 8px;
+    }
+    textarea,input,select{
+      width:100%;
+      border:1px solid #3d4360;
+      background:#141726;
+      color:#fff;
+      border-radius:8px;
+      padding:10px 12px;
+      font:inherit;
+    }
+    textarea{min-height:210px;resize:vertical}
+    .photo-row{
+      display:grid;
+      grid-template-columns:1.5fr 1fr 130px;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    button,a.btn{
+      border:0;
+      border-radius:8px;
+      padding:10px 14px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .primary{background:#4f8cff;color:#fff}
+    .warn{background:#f97316;color:#fff}
+    .ghost{background:#2c3249;color:#fff}
+    .ok{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:8px;
+      background:#12351f;
+      border:1px solid #245335;
+      display:none;
+    }
+    @media (max-width:760px){
+      .photo-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Edit Website Content</h1>
+    <p class="muted">Change text and photos here, then click Save. Open the main website to see updates.</p>
+
+    <div class="card">
+      <label for="note">Main Letter Text</label>
+      <textarea id="note"></textarea>
+    </div>
+
+    <div class="card">
+      <label for="song">Song URL or File Name</label>
+      <input id="song" type="text" placeholder="Example: song.mp3 or https://.../music.mp3" />
+      <p class="muted" style="margin-top:8px;">This song starts after you open the letter and loops continuously.</p>
+    </div>
+
+    <div class="card">
+      <label>Photos (URL + Caption + Layout)</label>
+      <div id="photos"></div>
+      <div class="btns">
+        <button type="button" class="ghost" id="add-photo">+ Add Photo</button>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button type="button" class="primary" id="save">Save Changes</button>
+      <button type="button" class="warn" id="reset">Reset to Default</button>
+      <a class="btn ghost" href="index.html">Open Website</a>
+    </div>
+
+    <div class="ok" id="msg">Saved! Open the website to view changes.</div>
+  </div>
+
+  <script>
+    const DEFAULT = {
+      song: 'song.mp3',
+      note: `Some distances are measured in miles, but ours has been measured in memories, calls, and countless moments of missing you. Yet I still can’t forget the day I left you at the airport — that moment somehow feels both distant and like yesterday.
+
+I may not always be good at expressing what I feel, but you’re missed in more ways than I can say. I often find myself smiling at the little things we used to do — pani puri 😅, late-night Swiggy cravings, fighting for that one spot on the sofa, and all those ordinary moments that quietly became my favorite memories.
+
+Maybe we still have to wait a little longer before we meet, but time has done its job so strangely well — it has flown by as if we’re still just having those everyday conversations in the living room. In a way, it feels like we’re still sitting in that same living room together… the only thing that has changed is the country between us.
+
+Now this distance has almost become part of normal routine, just woven into daily life. I still do all the same things, but there’s always this small emptiness, this feeling that something is missing. That never really goes away for me.
+
+And maybe, even my old “I wanted to live alone” thought has quietly become part of the list of things I once wanted, but don’t feel the same about anymore.
+
+Hopefully 🤞 we’ll meet soon. Until then, stay happy and enjoy your day. 😊`,
+      photos: [
+        {src:'photoes/1.jpeg',caption:'Photo 1',cls:'span2'},
+        {src:'photoes/2.jpeg',caption:'Photo 2',cls:'tall'},
+        {src:'photoes/3.jpeg',caption:'Photo 3',cls:''},
+        {src:'photoes/4.jpeg',caption:'Photo 4',cls:''},
+        {src:'photoes/5.jpeg',caption:'Photo 5',cls:'span2'},
+        {src:'photoes/6.png',caption:'Photo 6',cls:''},
+        {src:'photoes/7.jpeg',caption:'Photo 7',cls:'span2'}
+      ]
+    };
+
+    function loadContent(){
+      try{
+        const raw=localStorage.getItem('birthdayContent');
+        if(!raw) return DEFAULT;
+        const parsed=JSON.parse(raw);
+        return {
+          song: typeof parsed.song==='string' ? parsed.song : DEFAULT.song,
+          note: typeof parsed.note==='string' ? parsed.note : DEFAULT.note,
+          photos: Array.isArray(parsed.photos) ? parsed.photos : DEFAULT.photos
+        };
+      }catch(e){
+        return DEFAULT;
+      }
+    }
+
+    function row(photo={}){
+      const div=document.createElement('div');
+      div.className='photo-row';
+      div.innerHTML=`
+        <input type="text" placeholder="Photo URL" class="src" value="${photo.src||''}">
+        <input type="text" placeholder="Caption" class="caption" value="${photo.caption||''}">
+        <select class="cls">
+          <option value="" ${!photo.cls?'selected':''}>normal</option>
+          <option value="span2" ${photo.cls==='span2'?'selected':''}>span2</option>
+          <option value="tall" ${photo.cls==='tall'?'selected':''}>tall</option>
+        </select>
+      `;
+      return div;
+    }
+
+    function render(data){
+      document.getElementById('song').value=data.song||DEFAULT.song;
+      document.getElementById('note').value=data.note||'';
+      const wrap=document.getElementById('photos');
+      wrap.innerHTML='';
+      (data.photos||[]).forEach(p=>wrap.appendChild(row(p)));
+    }
+
+    function collect(){
+      const photos=[...document.querySelectorAll('.photo-row')]
+        .map(el=>({
+          src:el.querySelector('.src').value.trim(),
+          caption:el.querySelector('.caption').value.trim(),
+          cls:el.querySelector('.cls').value
+        }))
+        .filter(p=>p.src);
+      return {
+        song:document.getElementById('song').value.trim() || DEFAULT.song,
+        note:document.getElementById('note').value,
+        photos
+      };
+    }
+
+    function toast(text){
+      const msg=document.getElementById('msg');
+      msg.textContent=text;
+      msg.style.display='block';
+      setTimeout(()=>{msg.style.display='none';},1800);
+    }
+
+    render(loadContent());
+
+    document.getElementById('add-photo').addEventListener('click',()=>{
+      document.getElementById('photos').appendChild(row());
+    });
+
+    document.getElementById('save').addEventListener('click',()=>{
+      localStorage.setItem('birthdayContent',JSON.stringify(collect()));
+      toast('Saved! Open website to view changes.');
+    });
+
+    document.getElementById('reset').addEventListener('click',()=>{
+      localStorage.removeItem('birthdayContent');
+      render(DEFAULT);
+      toast('Reset done. Default content restored.');
+    });
+  </script>
+</body>
+</html>

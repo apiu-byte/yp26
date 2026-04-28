@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>A Special Birthday Surprise 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Background Layers -->
+<canvas id="stars"></canvas>
+<div id="aurora"></div>
+<div id="petals"></div>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-flower">🌸</div>
+    <div class="loader-text">Preparing your surprise...</div>
+  </div>
+</div>
+
+<!-- ENVELOPE SCENE -->
+<div id="scene">
+  <div class="scene-glow"></div>
+  <div class="scene-title">
+    <div class="title-deco">✦ ───── ✦ ───── ✦</div>
+    <h1 class="scene-h1">A Letter For You</h1>
+    <div class="title-sub">something special awaits</div>
+  </div>
+
+  <div id="envelope-wrap" onclick="openEnvelope()">
+    <div class="envelope-shadow"></div>
+    <div id="envelope">
+      <div class="env-body">
+        <div class="env-inner"></div>
+        <div class="env-left"></div>
+        <div class="env-right"></div>
+        <div class="env-pattern"></div>
+      </div>
+      <div id="letter-peek">
+        <div class="peek-paper">
+          <div class="peek-inner">
+            <div class="stamp">✦ With Love ✦</div>
+            <h2>Happy Birthday!</h2>
+            <div class="sub">A note just for you...</div>
+          </div>
+        </div>
+      </div>
+      <div id="flap"><div class="flap-front"></div><div class="flap-back"></div></div>
+      <div id="seal">
+        <div class="seal-inner">🌸</div>
+        <div class="seal-shine"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hint">
+    <span class="hint-arrow">✦</span>
+    <span class="hint-text">click to open</span>
+    <span class="hint-arrow">✦</span>
+  </div>
+</div>
+
+<!-- FULL LETTER -->
+<div id="full-letter">
+  <div class="letter-scroll">
+    <div class="full-paper">
+
+      <div class="paper-header">
+        <div class="header-overlay"></div>
+        <div class="birthday-tag">✨ A Special Birthday Message ✨</div>
+        <h1>Happy Birthday!</h1>
+        <div class="header-name"><h3> Yashvii (JADI) 🌸 </h3></div>
+        <div class="header-gold-bar"></div>
+        <div class="header-stars">
+          <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
+        </div>
+      </div>
+
+      <div class="wishes-row">
+        <div class="wish-pill">🎂 Joy &amp; Laughter</div>
+        <div class="wish-pill">🌸 Health &amp; Happiness</div>
+        <div class="wish-pill">✨ Dreams Come True</div>
+        <div class="wish-pill">💛 Love &amp; Light</div>
+        <div class="wish-pill">🎉 Adventure Ahead</div>
+        <div class="wish-pill">🌈 Peace Always</div>
+      </div>
+
+      <div class="note-section">
+        <div class="divider-row">
+          <span class="dl"></span><span class="diamond">◆</span><span class="dr"></span>
+        </div>
+        <div class="note-text" id="typed-note"></div>
+      </div>
+
+      <!-- PHOTO LIBRARY -->
+      <div class="gallery-section">
+        <div class="divider-row">
+          <span class="dl"></span><span class="diamond">◆</span><span class="dr"></span>
+        </div>
+        <div class="gallery-heading">Memories &amp; Moments</div>
+        <div class="gallery-subheading">a collection of beautiful days</div>
+        <div class="photo-grid" id="photo-grid"></div>
+        <div class="gallery-note">✦ &nbsp; click any photo to enlarge &nbsp; ✦</div>
+      </div>
+
+      <div class="signature-wrap">
+        <div class="sig-hearts">♥ ♥ ♥</div>
+        <div class="sig-content">
+          <div class="sig-name">With all my love 🌹</div>
+          <div class="sig-date" id="sig-date">Always with you, no matter the distance ✨</div>
+        </div>
+        <div class="balloon">🎈</div>
+      </div>
+
+    </div>
+    <div class="scroll-hint">↓ &nbsp; scroll to see more &nbsp; ↓</div>
+  </div>
+</div>
+
+<!-- Sticky close button -->
+<button id="close-btn" class="lb-btn" onclick="closeLetter()">✕</button>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lb-btn" id="lb-close" onclick="closeLb()">✕</button>
+  <button class="lb-btn" id="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="photo"/>
+  <button class="lb-btn" id="lb-next" onclick="lbNav(1)">›</button>
+  <div id="lb-caption"></div>
+</div>
+
+<!-- Surprise music: put your file as song.mp3 in this folder -->
+<audio id="surprise-song" src="song.mp3" preload="auto" loop></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
