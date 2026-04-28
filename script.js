@@ -83,18 +83,14 @@ const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)')
    CONTENT DATA (Editable via editor.html)
    ============================================ */
 const defaultPhotos=[
-  {src:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=900&q=85&auto=format&fit=crop',caption:'Birthday Celebration',cls:'span2'},
-  {src:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=85&auto=format&fit=crop',caption:'Birthday Cake',cls:'tall'},
-  {src:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=85&auto=format&fit=crop',caption:'Party Time',cls:''},
-  {src:'https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=600&q=85&auto=format&fit=crop',caption:'Colorful Balloons',cls:''},
-  {src:'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=600&q=85&auto=format&fit=crop',caption:'Beautiful Flowers',cls:'span2'},
-  {src:'https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=600&q=85&auto=format&fit=crop',caption:'Joyful Moments',cls:''},
-  {src:'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=900&q=85&auto=format&fit=crop',caption:'Sweet Cake Slice',cls:'span2'},
-  {src:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=85&auto=format&fit=crop',caption:'Celebration Lights',cls:''},
-  {src:'https://images.unsplash.com/photo-1597484661973-ee6cd0b6482c?w=600&q=85&auto=format&fit=crop',caption:'Surprise Gift',cls:''},
-  {src:'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=900&q=85&auto=format&fit=crop',caption:'Fireworks',cls:'span2'},
-  {src:'https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?w=600&q=85&auto=format&fit=crop',caption:'Birthday Roses',cls:''},
-];
+  {src:'photoes/1.jpeg',caption:'Photo 1',cls:'span2'},
+        {src:'photoes/2.jpeg',caption:'Photo 2',cls:'tall'},
+        {src:'photoes/3.jpeg',caption:'Photo 3',cls:''},
+        {src:'photoes/4.jpeg',caption:'Photo 4',cls:''},
+        {src:'photoes/5.jpeg',caption:'Photo 5',cls:'span2'},
+        {src:'photoes/6.png',caption:'Photo 6',cls:''},
+        {src:'photoes/7.jpeg',caption:'Photo 7',cls:'span2'}
+      ];
 
 const defaultNote=`Some distances are measured in miles, but ours has been measured in memories, calls, and countless moments of missing you. Yet I still can’t forget the day I left you at the airport — that moment somehow feels both distant and like yesterday.
 
